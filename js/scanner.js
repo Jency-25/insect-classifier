@@ -89,7 +89,30 @@ fileInput.addEventListener('change', (e) => {
     if (file) {
         const reader = new FileReader();
         reader.onload = function(event) {
-            setReadyImage(event.target.result);
+            // Resize image via canvas before sending to save massive bandwidth and memory!
+            const img = new Image();
+            img.onload = () => {
+                const MAX_SIZE = 600; // Perfect for 224x224 neural net input
+                let width = img.width;
+                let height = img.height;
+
+                if (width > height && width > MAX_SIZE) {
+                    height *= MAX_SIZE / width;
+                    width = MAX_SIZE;
+                } else if (height > MAX_SIZE) {
+                    width *= MAX_SIZE / height;
+                    height = MAX_SIZE;
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                // Compress output slightly to save backend JSON parsing memory
+                const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+                setReadyImage(compressedDataUrl);
+            };
+            img.src = event.target.result;
         };
         reader.readAsDataURL(file);
     }
