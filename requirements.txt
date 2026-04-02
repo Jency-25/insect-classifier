@@ -4,4 +4,4 @@ numpy
 pillow
 werkzeug
 gunicorn
-tflite-runtime
+tensorflow-cpu

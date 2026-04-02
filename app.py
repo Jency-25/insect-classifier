@@ -24,15 +24,9 @@ input_index = None
 output_index = None
 
 try:
-    # Use tflite_runtime if available (smaller), else fall back to tensorflow.lite
-    try:
-        import tflite_runtime.interpreter as tflite
-        interpreter = tflite.Interpreter(model_path=MODEL_PATH)
-        print("Using tflite_runtime interpreter")
-    except ImportError:
-        import tensorflow as tf
-        interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
-        print("Using tensorflow.lite interpreter")
+    import tensorflow as tf
+    interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
+    print("Using tensorflow.lite interpreter")
 
     interpreter.allocate_tensors()
 
