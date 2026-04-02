@@ -1,8 +1,7 @@
 flask
-tensorflow-cpu
+flask-cors
 numpy
 pillow
 werkzeug
 gunicorn
-flask-cors
-beautifulsoup4
+tflite-runtime
