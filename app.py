@@ -44,6 +44,12 @@ try:
     else:
         TARGET_SIZE = (224, 224)  # Default fallback shape
         
+    # WARM UP THE MODEL IN ADVANCE 
+    # This prevents the first user request from timing out (100s+) on Render!
+    print(f"Warming up model to compile TensorFlow graph...")
+    dummy_input = np.zeros((1, TARGET_SIZE[0], TARGET_SIZE[1], 3), dtype=np.float32)
+    model(dummy_input, training=False)
+        
     print(f"Model and labels loaded successfully! Expected image shape: {TARGET_SIZE}")
 except Exception as e:
     print(f"--- ERROR LOADING MODEL ---")
