@@ -8,6 +8,13 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 
+# CRITICAL: Extreme Memory Optimization for Render Free Tier (512MB RAM)
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # Force CPU
+os.environ['TF_NUM_INTEROP_THREADS'] = '1'
+os.environ['TF_NUM_INTRAOP_THREADS'] = '1'
+tf.config.threading.set_inter_op_parallelism_threads(1)
+tf.config.threading.set_intra_op_parallelism_threads(1)
+
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)  # Allow all origins (Vercel frontend → Render backend)
@@ -98,8 +105,10 @@ def predict():
         # Expand dims to match (batch_size, height, width, channels)
         img_array = np.expand_dims(img_array, axis=0)
 
-        # Run inference
-        predictions = model.predict(img_array)
+        # Run inference using the lightweight __call__ method instead of full predict()
+        # predict() builds heavily memory-intensive batching graphs, model() is faster for 1 image.
+        predictions = model(img_array, training=False)
+        predictions = predictions.numpy()
         
         # Get highest probability index
         class_index = np.argmax(predictions[0])
