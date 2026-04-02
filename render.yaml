@@ -3,7 +3,7 @@ services:
     name: insect-identifier-api
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app --timeout 120 --workers 1
+    startCommand: python app.py
     plan: free
     envVars:
       - key: PYTHON_VERSION

@@ -4,16 +4,13 @@ import base64
 from io import BytesIO
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
+import os
 import numpy as np
 import tensorflow as tf
 from PIL import Image
 
-# CRITICAL: Extreme Memory Optimization for Render Free Tier (512MB RAM)
+# Remove thread limits; let TensorFlow optimize for available cores
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # Force CPU
-os.environ['TF_NUM_INTEROP_THREADS'] = '1'
-os.environ['TF_NUM_INTRAOP_THREADS'] = '1'
-tf.config.threading.set_inter_op_parallelism_threads(1)
-tf.config.threading.set_intra_op_parallelism_threads(1)
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -43,12 +40,6 @@ try:
         TARGET_SIZE = (input_shape[1], input_shape[2])
     else:
         TARGET_SIZE = (224, 224)  # Default fallback shape
-        
-    # WARM UP THE MODEL IN ADVANCE 
-    # This prevents the first user request from timing out (100s+) on Render!
-    print(f"Warming up model to compile TensorFlow graph...")
-    dummy_input = np.zeros((1, TARGET_SIZE[0], TARGET_SIZE[1], 3), dtype=np.float32)
-    model(dummy_input, training=False)
         
     print(f"Model and labels loaded successfully! Expected image shape: {TARGET_SIZE}")
 except Exception as e:
@@ -140,6 +131,8 @@ def predict():
 
 if __name__ == '__main__':
     print("Starting Flask Server...")
-    print("Access the app at: http://127.0.0.1:5000")
-    # Using host 0.0.0.0 so it can be accessed on the local network (requires HTTPS for camera, though)
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    # Dynamically bind to the PORT provided by Render
+    port = int(os.environ.get("PORT", 5000))
+    print(f"Access the app at: http://0.0.0.0:{port}")
+    # Using host 0.0.0.0 so it can be accessed on the local network (or Render network)
+    app.run(host='0.0.0.0', port=port, debug=False)
