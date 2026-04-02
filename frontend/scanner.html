@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner | Insect Identifier</title>
+    <!-- CSS cache buster updated to v3 -->
+    <link rel="stylesheet" href="./css/style.css?v=7">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="./index.html" class="brand">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            Insect <span>Identifier</span>
+        </a>
+        <div class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./scanner.html" class="active">Scanner</a>
+        </div>
+    </nav>
+
+    <div class="scanner-container">
+        <div class="scanner-header glass-panel" style="padding: 1.5rem; border-radius: 50px; display: inline-block; margin: 0 auto 3rem auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <h2 style="font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0;">Insect Classification Scanner</h2>
+            <p style="font-size: 0.95rem; margin-top: 0.5rem; color: var(--text-secondary);">Capture a clear structure or upload from device.</p>
+        </div>
+
+        <main class="scanner-workspace">
+            
+            <!-- Camera & Image Panel -->
+            <div class="panel glass-panel">
+                <div class="preview-box">
+                    <video id="camera-feed" playsinline autoplay></video>
+                    <img id="uploaded-image" src="" alt="Captured Image">
+                    <canvas id="capture-canvas"></canvas>
+                    
+                    <div class="view-guide" id="view-guide"></div>
+
+                    <div class="loading-spinner" id="loading-spinner">
+                        <div class="spinner"></div>
+                        <p style="color: var(--accent-primary); font-weight: 600; letter-spacing: 1px;">Processing Analysis...</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <button class="control-btn btn-block" id="take-photo-btn">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Capture Lens
+                    </button>
+                    <button class="control-btn btn-block" id="retake-photo-btn" style="display: none;">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        Discard
+                    </button>
+                </div>
+
+                <div class="divider">OR</div>
+
+                <button class="control-btn btn-block" id="upload-btn">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    Upload Database File
+                </button>
+                <input type="file" id="file-input" accept="image/png, image/jpeg, image/jpg">
+
+                <button class="btn-primary btn-block" id="analyze-btn" style="margin-top: 2rem; opacity: 0.5; pointer-events: none; padding: 1.25rem; font-size: 1.15rem;">
+                    Initiate Neural Scan
+                </button>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="panel glass-panel results-panel">
+                <div class="status-header">
+                    <div class="status-title" id="status-display">Awaiting Telemetry</div>
+                    <div class="confidence-badge" id="confidence-display">Confidence: --%</div>
+                </div>
+
+                <div class="info-block" style="margin-top: 1rem;">
+                    <span class="info-label">IDENTIFIED SPECIMEN</span>
+                    <span class="info-value" id="identified-insect">Unknown</span>
+                </div>
+
+                <div class="info-block">
+                    <span class="info-label">ECOLOGICAL ROLE / DETAILS</span>
+                    <div class="suggestion-box" id="suggested-treatment">
+                        Upload or capture a specimen to process diagnostic profile.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JS Cache buster v3 -->
+    <script src="./js/scanner.js?v=5"></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insect Identifier | Department of Zoology, MCC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=8">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/" class="brand">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+            Insect <span>Identifier</span>
+        </a>
+        <div class="nav-links">
+            <a href="/" class="active">Home</a>
+            <a href="/scanner">Scanner</a>
+        </div>
+    </nav>
+
+    <div class="home-container">
+
+        <!-- LEFT: Hero Panel -->
+        <section class="hero-content glass-panel">
+            <h1>Department of<br>Zoology</h1>
+            <p>
+                The Department of Zoology was established in 1885 and is one of the oldest centers of higher education
+                in Southern India. Areas of specialization include Animal Behaviour, Aquaculture, Endocrinology,
+                Entomology and Fisheries Science. Utilizing our cutting-edge convolutional neural networks, you can
+                classify beautiful, rare, or complex insect species instantly right from your device.
+            </p>
+            <br>
+            <a href="/scanner" class="btn-primary">
+                Open AI Scanner
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </section>
+
+        <!-- RIGHT: Informative Panel -->
+        <aside class="info-sidebar">
+
+            <!-- Stats Row -->
+            <div class="stats-row glass-panel">
+                <div class="stat-item">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">Species</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-number">2026</div>
+                    <div class="stat-label">Year</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-number">AI</div>
+                    <div class="stat-label">Powered</div>
+                </div>
+            </div>
+
+            <!-- How It Works -->
+            <div class="how-it-works glass-panel">
+                <h3 class="sidebar-title">
+                    <svg width="18" height="18" fill="none" stroke="var(--accent-primary)" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                    How It Works
+                </h3>
+                <div class="step-list">
+                    <div class="step">
+                        <div class="step-num">01</div>
+                        <div class="step-info">
+                            <div class="step-title">Upload or Capture</div>
+                            <div class="step-desc">Take a photo via your camera or upload an image of any insect from your device.</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">02</div>
+                        <div class="step-info">
+                            <div class="step-title">AI Analysis</div>
+                            <div class="step-desc">Our convolutional neural network processes the image, scanning for morphological patterns.</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">03</div>
+                        <div class="step-info">
+                            <div class="step-title">Instant Results</div>
+                            <div class="step-desc">Get the species name, confidence score, and a full ecological profile instantly.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Species Categories -->
+            <div class="categories-panel glass-panel">
+                <h3 class="sidebar-title">
+                    <svg width="18" height="18" fill="none" stroke="var(--accent-primary)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>
+                    Identifiable Groups
+                </h3>
+                <p class="category-hint">Click any group to explore species details</p>
+                <div class="category-tags">
+                    <span class="cat-tag" data-group="butterfly">🦋 Butterflies</span>
+                    <span class="cat-tag" data-group="moth">🦗 Moths</span>
+                    <span class="cat-tag" data-group="beetle">🐛 Beetles</span>
+                    <span class="cat-tag" data-group="bee">🐝 Bees & Wasps</span>
+                    <span class="cat-tag" data-group="bug">🪲 True Bugs</span>
+                    <span class="cat-tag" data-group="dragonfly">🦟 Dragonflies</span>
+                    <span class="cat-tag" data-group="cockroach">🪳 Cockroaches</span>
+                    <span class="cat-tag" data-group="cicada">🦟 Cicadas</span>
+                </div>
+            </div>
+
+        </aside>
+    </div>
+
+    <!-- Scrolling Insect Gallery Marquee -->
+    <div class="bottom-marquee glass-panel">
+        <div class="marquee-track">
+            <img src="{{ url_for('static', filename='img/slider/1.jpg') }}" class="marquee-img" alt="Blue Tiger Butterfly">
+            <img src="{{ url_for('static', filename='img/slider/2.jpg') }}" class="marquee-img" alt="Cicada">
+            <img src="{{ url_for('static', filename='img/slider/3.jpg') }}" class="marquee-img" alt="7-Spotted Cockroach">
+            <img src="{{ url_for('static', filename='img/slider/4.jpg') }}" class="marquee-img" alt="Common Tiger Butterfly">
+            <img src="{{ url_for('static', filename='img/slider/5.jpg') }}" class="marquee-img" alt="Carpenter Bee">
+            <!-- Duplicate for seamless loop -->
+            <img src="{{ url_for('static', filename='img/slider/1.jpg') }}" class="marquee-img" alt="Blue Tiger Butterfly">
+            <img src="{{ url_for('static', filename='img/slider/2.jpg') }}" class="marquee-img" alt="Cicada">
+            <img src="{{ url_for('static', filename='img/slider/3.jpg') }}" class="marquee-img" alt="7-Spotted Cockroach">
+            <img src="{{ url_for('static', filename='img/slider/4.jpg') }}" class="marquee-img" alt="Common Tiger Butterfly">
+            <img src="{{ url_for('static', filename='img/slider/5.jpg') }}" class="marquee-img" alt="Carpenter Bee">
+        </div>
+    </div>
+
+    <!-- ===== SPECIES MODAL ===== -->
+    <div class="species-modal-overlay" id="speciesOverlay">
+        <div class="species-modal glass-panel">
+            <div class="modal-header">
+                <h2 id="modalTitle">Species</h2>
+                <button class="modal-close" id="modalClose" aria-label="Close">&#x2715;</button>
+            </div>
+            <div class="modal-species-list" id="modalSpeciesList">
+                <!-- Cards injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ── Species database from Flask ──
+        const SPECIES_DB = {{ species_json | safe }};
+
+        // ── Category → label keywords mapping ──
+        const CATEGORY_MAP = {
+            butterfly: ['Blue tiger','Common gull','Common mormon','Common tiger','Common wanderer','Crimson rose','Emigrant','Eurema','Plain tiger','Tawny coster'],
+            moth:      ['Death','Eudocima','Eupterote','Sandwood','Sphinx','Thyas'],
+            beetle:    ['Rhinoceros'],
+            bee:       ['Carpenter bee','Paper wasp'],
+            bug:       ['Pyrochorrid'],
+            dragonfly: ['Dragonfly'],
+            cockroach: ['cockroach'],
+            cicada:    ['Cicada']
+        };
+
+        function getSpeciesForGroup(group) {
+            const keywords = CATEGORY_MAP[group] || [];
+            return Object.entries(SPECIES_DB).filter(([key]) =>
+                keywords.some(kw => key.toLowerCase().includes(kw.toLowerCase()))
+            );
+        }
+
+        function openModal(group, groupLabel) {
+            const entries = getSpeciesForGroup(group);
+            const list = document.getElementById('modalSpeciesList');
+            const title = document.getElementById('modalTitle');
+
+            title.textContent = groupLabel + ' — Field Guide';
+            list.innerHTML = '';
+
+            if (entries.length === 0) {
+                list.innerHTML = '<p style="color:var(--text-secondary);padding:2rem;">No species data found for this group.</p>';
+            } else {
+                entries.forEach(([key, html]) => {
+                    const card = document.createElement('div');
+                    card.className = 'modal-species-card glass-panel';
+                    const name = key.replace(/_/g,' ').replace(/\b\w/g, c => c.toUpperCase());
+                    card.innerHTML = `
+                        <div class="modal-species-name">${name}</div>
+                        <div class="modal-species-details details-content">${html}</div>
+                    `;
+                    list.appendChild(card);
+                });
+            }
+
+            document.getElementById('speciesOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('speciesOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('speciesOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        document.querySelectorAll('.cat-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                openModal(tag.dataset.group, tag.textContent.trim());
+            });
+        });
+    </script>
+</body>
+
+</html>

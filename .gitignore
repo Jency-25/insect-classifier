@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+env/
+
+# Build artifacts
+build_db.py
+insect_species_guide.html
+
+# OS
+.DS_Store
+Thumbs.db

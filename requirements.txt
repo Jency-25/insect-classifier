@@ -1,0 +1,8 @@
+flask
+tensorflow-cpu
+numpy
+pillow
+werkzeug
+gunicorn
+flask-cors
+beautifulsoup4
